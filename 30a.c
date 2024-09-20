@@ -8,24 +8,33 @@ Date: 20th Sept, 2024.
 ============================================================================
 */
 
-#include<sys/shm.h>
-#include<unistd.h>
-#include<stdio.h>
+#include <sys/shm.h>
+#include <unistd.h>
+#include <stdio.h>
 
 int main(){
 
-	int key,shmid;
+	key_t key=ftok(".",30);
+	int shm_id;
 	char *text;
+
+	shm_id=shmget(key,1024,IPC_CREAT|0666);
+
+	text=shmat(shm_id,0,0);
 	
-	int key = ftok(".",'c');
-shmid=shmget(key,1024,IPC_CREAT|0744);
-data =shmat(shmid,0,0);
-printf("enter text:");
-scanf("%[^\n]",data);
-printf("data from shared memory : %s\n", data);
+	printf("Enter the text to be entered in Shared Memory\n");
+	scanf("%[^\n]",text);
+	
+	printf("Text in the Shared memory: %s\n",text);
+	
 }
 /*
 ============================================================================
 Output:
+bhavya@Bhavya:~/SSHandOnList2$ ./a.out
+Enter the text to be entered in Shared Memory
+This is Question 30a.
+Text in the Shared memory: This is Question 30a.
+
 ============================================================================
 */
