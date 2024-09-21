@@ -1,9 +1,9 @@
 /*
 ============================================================================
-Name : 32b.c
+Name : 32c.c
 Author : Bhavya Joshi
-Description :  Write a program to implement semaphore to protect any critical section.
-b. protect shared memory from concurrent write access 
+Description : Write a program to implement semaphore to protect any critical section.
+c. protect multiple pseudo resources ( may be two) using counting semaphore 
 Date: 21st Sept, 2024.
 ============================================================================
 */
@@ -16,46 +16,44 @@ Date: 21st Sept, 2024.
 #include <unistd.h>
 
 int main(){
-	
-	int shm_key,shm_id,sem_key,sem_id;
+ 	int shm_key,shm_id,sem_key,sem_id;
 	char *text;
 
-	shm_key=ftok(".",'d');
+	shm_key=ftok(".",34);
 	shm_id=shmget(shm_key,1024,IPC_CREAT|0744);
-	text=shmat(shm_id,0,0);
-	sem_key=ftok(".",'e');
+	text =shmat(shm_id,0,0);
+	sem_key=ftok(".",33);
 	sem_id=(sem_key,1,0);
-
+	
 	struct sembuf buff={0,-1,0};
-
 	sem_id=semget(sem_key,1,0);
 	semop(sem_id,&buff,1);
 
-	printf("Entered Critical Section\n");
-	printf("Enter Text:\n");
+	printf("Inside Critical Section\n");
+	printf("Enter Text:");
 	scanf("%[^\n]",text);
-	
 	printf("Data in the Shared Memory: %s\n",text);
 
 	printf("Press Enter to Exit CS\n");
 	getchar();
+	
 	buff.sem_op=1;
 	semop(sem_id,&buff,1);
-
 	printf("Exited CS\n");
 
 	return 0;
 
 }
+
+
 /*
 ============================================================================
 Output:
-bhavya@Bhavya:~/SSHandOnList2$ cc 32b.c
+bhavya@Bhavya:~/SSHandOnList2$ cc 32c.c
 bhavya@Bhavya:~/SSHandOnList2$ ./a.out
-Entered Critical Section
-Enter Text:
-This is Question 32b
-Data in the Shared Memory: This is Question 32b
+Inside Critical Section
+Enter Text:This is Q 32c
+Data in the Shared Memory: This is Q 32c
 Press Enter to Exit CS
 Exited CS
 
