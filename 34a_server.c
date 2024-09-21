@@ -1,7 +1,7 @@
 /*
 ============================================================================
 Name : 34a_server.c
-Author : Bhavya J
+Author : Bhavya Joshi
 Description: Write a program to create a concurrent server.
 a. use fork
 Date: 21st Sept, 2024.
@@ -28,7 +28,7 @@ int main(){
 	server.sin_addr.s_addr=INADDR_ANY;
 	server.sin_port=htons(5080);
 
-	bind(sd,(void*)(&server),sizeof(serv));
+	bind(sd,(void*)(&server),sizeof(server));
 	listen(sd,5);
 	sz=sizeof(client);
 	
@@ -51,5 +51,11 @@ int main(){
 /*
 ============================================================================
 Output:
+bhavya@Bhavya:~/SSHandOnList2$ cc 34a_server.c -o 34a_s_o
+bhavya@Bhavya:~/SSHandOnList2$ ./34a_s_o
+Message from Client: This is Client
+Message from Client: This is Client
+
+
 ============================================================================
 */

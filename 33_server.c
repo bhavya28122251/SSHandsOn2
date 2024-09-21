@@ -23,7 +23,7 @@ int main(){
 
 	server.sin_family = AF_UNIX;
 	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port=htons(5055);
+	server.sin_port=htons(5050);
 
 	bind(sd,(void*)(&server),sizeof(server));
 	listen(sd,5);
@@ -41,5 +41,9 @@ int main(){
 /*
 ============================================================================
 Output:
+bhavya@Bhavya:~/SSHandOnList2$ cc 33_server.c -o 33server
+bhavya@Bhavya:~/SSHandOnList2$ ./33server
+Message from Client:This is Client
+
 ============================================================================
 */

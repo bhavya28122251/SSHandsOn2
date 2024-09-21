@@ -22,7 +22,7 @@ int main(){
 	union semun s;
 	int sem_id;
 
-	key_t key=ftok(".",32);
+	key_t key=ftok(".",'e');
 	
 	sem_id=semget(key,1,IPC_CREAT|0644);
 	s.value=1;

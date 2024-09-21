@@ -19,7 +19,7 @@ Date: 21st Sept, 2024.
 int main(){
 	struct sockaddr_in server;
 	int sd;
-	char buff[80];
+	char buf[80];
 
 	sd = socket (AF_UNIX, SOCK_STREAM, 0);
 

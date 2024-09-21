@@ -22,7 +22,7 @@ void handle_client(void *nsd,void *sd){
 	char buf[80];
 	close(sd);
 	
-	read(nsd,buff,sizeof(buf));
+	read(nsd,buf,sizeof(buf));
 	printf("Message from client: %s\n",buf);
 	write(nsd,"This is server\n",14);
 }
